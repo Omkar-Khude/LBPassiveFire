@@ -33,5 +33,10 @@ public class SurveyController {
 	 public List<Survey> getAllSurveys() {
 	        return surveyRepository.findAll();
 	 }
-
+	
+	 @GetMapping("/survey/FD")
+	 public ResponseEntity<List<Survey>> getFDSurvey() {
+	     List<Survey> fdSurvey = surveyRepository.findBySurveyTypeIgnoreCase("FD");
+	     return ResponseEntity.ok(fdSurvey);
+	 }
 }

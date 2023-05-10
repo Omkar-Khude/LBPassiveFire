@@ -29,6 +29,8 @@ public class Admin {
 	
 	@NotNull(message = "password should not be null.")
 	private String password;
+	
+	private String status;
 	public int getId() {
 		return id;
 	}
@@ -59,6 +61,12 @@ public class Admin {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 
