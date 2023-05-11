@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Entity.Survey;
 import com.example.demo.repository.SurveyRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 
 
 @RestController
@@ -23,6 +25,7 @@ public class SurveyController {
 	private SurveyRepository surveyRepository;
 	
 	 @PostMapping("/addsurvey")
+	 @Operation(description ="Post api to add survey details") 
 	    public ResponseEntity<Survey> addSurvey(@RequestBody Survey survey) {
 	        Survey savedSurvey = surveyRepository.save(survey);
 	        return ResponseEntity.ok(savedSurvey);
@@ -30,11 +33,13 @@ public class SurveyController {
 	 
 	 
 	 @GetMapping("/getsurvey")
+	 @Operation(description ="Get api to get all survey details") 
 	 public List<Survey> getAllSurveys() {
 	        return surveyRepository.findAll();
 	 }
 	
 	 @GetMapping("/survey/FD")
+	 @Operation(description ="Get api to get FD survey details") 
 	 public ResponseEntity<List<Survey>> getFDSurvey() {
 	     List<Survey> fdSurvey = surveyRepository.findBySurveyTypeIgnoreCase("FD");
 	     return ResponseEntity.ok(fdSurvey);

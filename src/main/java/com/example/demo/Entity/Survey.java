@@ -15,7 +15,7 @@ public class Survey {
 	private String surveyType;
 	private String siteName;
 	private String siteAddress;
-	private String datetime;
+	private String dateTime;
 	private String engineer;
 	public int getId() {
 		return id;
@@ -35,11 +35,11 @@ public class Survey {
 	public void setSiteName(String siteName) {
 		this.siteName = siteName;
 	}
-	public String getDatetime() {
-		return datetime;
+	public String getDateTime() {
+		return dateTime;
 	}
-	public void setDatetime(String datetime) {
-		this.datetime = datetime;
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
 	}
 	public String getEngineer() {
 		return engineer;
