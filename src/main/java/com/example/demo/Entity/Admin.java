@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -60,7 +61,8 @@ public class Admin {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
 	}
 	public String getStatus() {
 		return status;

@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 @Table
 public class Door {
 	
+	private String picture;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -22,7 +23,17 @@ public class Door {
 	
 	private String notes;
 	
-	private String remark;
+	private String access;
+	
+	private String fireRating;
+	
+	private String labels;
+	
+	private String testEvidence;
+	
+	private String doorReplacement;
+	
+	private String artNo;
 
 	public int getId() {
 		return id;
@@ -64,13 +75,62 @@ public class Door {
 		this.notes = notes;
 	}
 
-
-	public String getRemark() {
-		return remark;
+	public String getAccess() {
+		return access;
 	}
 
-	public void setRemark(String remark) {
-		this.remark = remark;
+	public void setAccess(String access) {
+		this.access = access;
 	}
+
+	public String getFireRating() {
+		return fireRating;
+	}
+
+	public void setFireRating(String fireRating) {
+		this.fireRating = fireRating;
+	}
+
+	public String getLabels() {
+		return labels;
+	}
+
+	public void setLabels(String labels) {
+		this.labels = labels;
+	}
+
+	public String getTestEvidence() {
+		return testEvidence;
+	}
+
+	public void setTestEvidence(String testEvidence) {
+		this.testEvidence = testEvidence;
+	}
+
+	public String getDoorReplacement() {
+		return doorReplacement;
+	}
+
+	public void setDoorReplacement(String doorReplacement) {
+		this.doorReplacement = doorReplacement;
+	}
+
+	public String getArtNo() {
+		return artNo;
+	}
+
+	public void setArtNo(String artNo) {
+		this.artNo = artNo;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+
 
 }
