@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +25,7 @@ public class User {
 	
 	private String status;
 	
-	private String usertype;
+	private String userType;
 
 	public int getId() {
 		return id;
@@ -62,7 +64,8 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-        this.password = password;
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
 	}
 
 	public String getStatus() {
@@ -73,12 +76,12 @@ public class User {
 		this.status = status;
 	}
 
-	public String getUsertype() {
-		return usertype;
+	public String getUserType() {
+		return userType;
 	}
 
-	public void setUsertype(String usertype) {
-		this.usertype = usertype;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 }

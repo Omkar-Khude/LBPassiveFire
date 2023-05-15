@@ -18,13 +18,7 @@ public class DoorController {
 	@Autowired
 	private DoorRepository doorRepository;
 	
-	
-//	 @PostMapping("/addDoor")
-//	 @Operation(description ="Post api to add door details") 
-//	    public ResponseEntity<Door> addDoor(@RequestBody Door door) {
-//	        Door savedDoor = doorRepository.save(door);
-//	        return ResponseEntity.ok(savedDoor);
-//	    }
+
 	 @PostMapping("/addDoor")
 	 @Operation(description ="Post api to add door details") 
 	 public ResponseEntity<Door> addDoorDetails(@RequestBody Door door) {
