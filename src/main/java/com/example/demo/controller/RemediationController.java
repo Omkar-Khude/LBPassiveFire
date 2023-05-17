@@ -17,7 +17,7 @@ public class RemediationController {
 	@Autowired
 	private RemediationRepository remediationRepository;
 
-	@PostMapping("/addRemediation")
+	@PostMapping("/addRemediationDetails")
 	 @Operation(description ="Post api to add remediation details") 
 	    public ResponseEntity<Remediation> addRemediation(@RequestBody Remediation remediation) {
 	        Remediation savedRemediation = remediationRepository.save(remediation);

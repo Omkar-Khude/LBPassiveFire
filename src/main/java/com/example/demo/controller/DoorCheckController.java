@@ -19,7 +19,7 @@ public class DoorCheckController {
 	@Autowired
 	private DoorCheckRepository doorCheckRepository;
 	
-	 @PostMapping("/addDoorCheck")
+	 @PostMapping("/addDoorCheckDetails")
 	 @Operation(description ="Post api to add door check details") 
 	    public ResponseEntity<DoorCheck> addDoorCheck(@RequestBody DoorCheck doorCheck) {
 	        DoorCheck savedDoorCheck = doorCheckRepository.save(doorCheck);

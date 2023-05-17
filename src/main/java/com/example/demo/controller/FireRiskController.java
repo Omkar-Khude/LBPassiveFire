@@ -19,7 +19,7 @@ public class FireRiskController {
 	private FireRiskRepository fireRiskRepository;
 
 	
-	@PostMapping("/addFireRisk")
+	@PostMapping("/addFireRiskDetails")
 	 @Operation(description ="Post api to add fire risk details") 
 	    public ResponseEntity<FireRisk> addFireRisk(@RequestBody FireRisk fireRisk) {
 	        FireRisk savedFireRisk = fireRiskRepository.save(fireRisk);

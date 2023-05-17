@@ -19,7 +19,7 @@ public class FireRatedRiskController {
 	@Autowired
 	private FireRatedRiskRepository fireRatedRiskRepository;
 	
-	@PostMapping("/addFireRatedRisk")
+	@PostMapping("/addFireRatedRiskDetails")
 	 @Operation(description ="Post api to add fire rated risk details") 
 	    public ResponseEntity<FireRatedRisk> addFireRatedRisk(@RequestBody FireRatedRisk fireRatedRisk) {
 	        FireRatedRisk savedFireRatedRisk = fireRatedRiskRepository.save(fireRatedRisk);

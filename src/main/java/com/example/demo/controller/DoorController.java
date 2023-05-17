@@ -19,7 +19,7 @@ public class DoorController {
 	private DoorRepository doorRepository;
 	
 
-	 @PostMapping("/addDoor")
+	 @PostMapping("/addDoorDetails")
 	 @Operation(description ="Post api to add door details") 
 	 public ResponseEntity<Door> addDoorDetails(@RequestBody Door door) {
 	        if ("no".equals(door.getAccess())) {

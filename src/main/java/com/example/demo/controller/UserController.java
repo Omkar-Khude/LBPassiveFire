@@ -30,7 +30,7 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	
-	 @PostMapping("/adduser")
+	 @PostMapping("/addUserDetails")
 	 @Operation(description ="Post api to add user details") 
 	 public ResponseEntity<User> addUser(@RequestBody User user) {
 	        User savedUser = userRepository.save(user);
@@ -39,13 +39,13 @@ public class UserController {
 	 
 	 
 	 
-	 @GetMapping("/getuser")
+	 @GetMapping("/getUserDetails")
 	 @Operation(description ="Get api to get all user details") 
 	 public List<User> getAllusers() {
 	        return userRepository.findAll();
 	 }
 	 
-	 @GetMapping("/getuser/{id}")
+	 @GetMapping("/getUserDetails/{id}")
 	 @Operation(description ="Get api to get user details by id") 
 		public User getUserById(@PathVariable int id) {
 		    if(userRepository.findById(id)==null) {
@@ -76,7 +76,7 @@ public class UserController {
 	        return ResponseEntity.ok().body("Logged in successfully!");
 	    }
 	 
-	 @PostMapping("/employeeLogin")
+	 @PostMapping("/engineerLogin")
 		@Operation(description ="Post api to login employee by emailId and password") 
 		public ResponseEntity<?> loginEmployee(@RequestBody LoginRequest loginRequest) throws NotFoundException {
 	        String emailId = loginRequest.getEmailId();
@@ -84,7 +84,7 @@ public class UserController {
 
 	        User user = userRepository.findByEmailId(emailId);
 
-	        if (user == null  || !user.getUserType().equals("employee")) {
+	        if (user == null  || !user.getUserType().equals("engineer")) {
 	        	throw new NotFoundException("Invalid emailId or password!");
 	        }
 

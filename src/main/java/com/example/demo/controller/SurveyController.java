@@ -24,7 +24,7 @@ public class SurveyController {
 	@Autowired
 	private SurveyRepository surveyRepository;
 	
-	 @PostMapping("/addsurvey")
+	 @PostMapping("/addSurveyDetails")
 	 @Operation(description ="Post api to add survey details") 
 	    public ResponseEntity<Survey> addSurvey(@RequestBody Survey survey) {
 	        Survey savedSurvey = surveyRepository.save(survey);
@@ -32,13 +32,13 @@ public class SurveyController {
 	    }
 	 
 	 
-	 @GetMapping("/getsurvey")
+	 @GetMapping("/getSurveyDetails")
 	 @Operation(description ="Get api to get all survey details") 
 	 public List<Survey> getAllSurveys() {
 	        return surveyRepository.findAll();
 	 }
 	
-	 @GetMapping("/survey/FD")
+	 @GetMapping("/getSurvey/FD")
 	 @Operation(description ="Get api to get FD survey details") 
 	 public ResponseEntity<List<Survey>> getFDSurvey() {
 	     List<Survey> fdSurvey = surveyRepository.findBySurveyTypeIgnoreCase("FD");
