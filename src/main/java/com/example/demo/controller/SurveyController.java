@@ -5,13 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Entity.Survey;
+import com.example.demo.dto.Remedial;
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.repository.SurveyRepository;
+import com.example.demo.service.SurveyService;
 
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -23,6 +28,9 @@ public class SurveyController {
 	
 	@Autowired
 	private SurveyRepository surveyRepository;
+	
+	@Autowired
+	private SurveyService surveyService;
 	
 	 @PostMapping("/addSurveyDetails")
 	 @Operation(description ="Post api to add survey details") 
@@ -43,5 +51,12 @@ public class SurveyController {
 	 public ResponseEntity<List<Survey>> getFDSurvey() {
 	     List<Survey> fdSurvey = surveyRepository.findBySurveyTypeIgnoreCase("FD");
 	     return ResponseEntity.ok(fdSurvey);
+	 }
+	 
+	 @PutMapping("/assignRemedial/{surveyId}")
+	 @Operation(description ="Put api to assign remedial") 
+	 public ResponseEntity<Object>assignRemedial(@RequestBody Remedial remedial, @PathVariable(value="surveyId") int surveyId) throws NotFoundException{
+		 ResponseEntity<Object>ab=surveyService.assignRemedial(remedial,surveyId);
+		 return ab;
 	 }
 }
