@@ -6,6 +6,6 @@ import com.example.demo.Entity.Door;
 
 @Repository
 public interface DoorRepository extends JpaRepository<Door, Integer> {
-
+	Door findById(int id);
 
 }

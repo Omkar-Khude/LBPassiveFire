@@ -14,4 +14,7 @@ import com.example.demo.Entity.Survey;
 public interface SurveyRepository extends JpaRepository<Survey, Integer> {
 
 	 List<Survey> findBySurveyTypeIgnoreCase(String surveyType);
+	 
+
+	 
 }

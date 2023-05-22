@@ -19,6 +19,10 @@ public class Remediation {
 	private String details;
 	
 	private String artNo;
+	
+	private String beforePhoto;
+	
+	private String afterPhoto;
 
 	public int getId() {
 		return id;
@@ -50,6 +54,22 @@ public class Remediation {
 
 	public void setArtNo(String artNo) {
 		this.artNo = artNo;
+	}
+
+	public String getBeforePhoto() {
+		return beforePhoto;
+	}
+
+	public void setBeforePhoto(String beforePhoto) {
+		this.beforePhoto = beforePhoto;
+	}
+
+	public String getAfterPhoto() {
+		return afterPhoto;
+	}
+
+	public void setAfterPhoto(String afterPhoto) {
+		this.afterPhoto = afterPhoto;
 	}
 
 }
