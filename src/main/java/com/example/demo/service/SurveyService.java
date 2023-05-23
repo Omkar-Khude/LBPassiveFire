@@ -2,12 +2,15 @@ package com.example.demo.service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.example.demo.Entity.Survey;
+import com.example.demo.dto.Engineer;
 import com.example.demo.dto.Remedial;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.repository.SurveyRepository;
@@ -41,5 +44,31 @@ public class SurveyService {
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 	
+
+	public Survey reassignEngineer(int surveyId, Engineer request) {
+        Optional<Survey> optionalSurvey = surveyRepository.findById(surveyId);
+
+        if (optionalSurvey.isEmpty()) {
+            return null;
+        }
+
+        Survey survey = optionalSurvey.get();
+
+        String currentEngineer = request.getCurrentEngineer();
+
+    
+        if (!survey.getEngineer().equals(currentEngineer)) {
+            return null;
+        }
+
+        String newEngineer = request.getEngineer();
+
+ 
+        survey.setEngineer(newEngineer);
+
+        surveyRepository.save(survey);
+
+        return survey;
+    }
 
 }

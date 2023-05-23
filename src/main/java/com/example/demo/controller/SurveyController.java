@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Entity.Survey;
+import com.example.demo.dto.Engineer;
 import com.example.demo.dto.Remedial;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.repository.SurveyRepository;
@@ -57,4 +58,17 @@ public class SurveyController {
 	 }
 	 
 	
+	 @PutMapping("/reAssignEngineer/{surveyId}")
+	    public ResponseEntity<Survey> reassignEngineer(
+	            @PathVariable int surveyId,
+	            @RequestBody Engineer request
+	    ) {
+	        Survey updatedSurvey = surveyService.reassignEngineer(surveyId, request);
+	        
+	        if (updatedSurvey == null) {
+	            return ResponseEntity.notFound().build();
+	        }
+	        
+	        return ResponseEntity.ok(updatedSurvey);
+	    }
 }
