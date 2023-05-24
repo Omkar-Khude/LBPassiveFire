@@ -32,7 +32,7 @@ public class ApprovedRemedialWorkController {
 	    }
 
 	@PutMapping("/editApprovedRemedialWorkDetails/{id}")
-	@Operation(description ="put api to edit approvedRemedialWork details by id")
+	@Operation(description ="Put api to edit approvedRemedialWork details by id")
 	public ApprovedRemedialWork updateApprovedRemedialWork(@PathVariable int id, @RequestBody ApprovedRemedialWork updatedApprovedRemedialWork) {
 		ApprovedRemedialWork approvedRemedialWork = approvedRemedialWorkRepository.findById(id).orElse(null);
 	    if (approvedRemedialWork != null) {
@@ -44,13 +44,13 @@ public class ApprovedRemedialWorkController {
 	}
 	
 	@DeleteMapping("/deleteApprovedRemedialWorkDetails/{id}")
-	@Operation(description ="delete api to delete approvedRemedialWork details by id")
+	@Operation(description ="Delete api to delete approvedRemedialWork details by id")
 	public void deleteApprovedRemedialWork(@PathVariable int id) {
 		approvedRemedialWorkRepository.deleteById(id);
 	}
 	
 	@GetMapping("/getApprovedRemedialWorkDetails/{id}")
-	@Operation(description ="get api to get approvedRemedialWork details by id")
+	@Operation(description ="Get api to get approvedRemedialWork details by id")
 	public ResponseEntity<ApprovedRemedialWork> getApprovedRemedialWorkById(@PathVariable int id) {
 	    Optional<ApprovedRemedialWork> approvedRemedialWorkOptional = approvedRemedialWorkRepository.findById(id);
 	    if (approvedRemedialWorkOptional.isPresent()) {

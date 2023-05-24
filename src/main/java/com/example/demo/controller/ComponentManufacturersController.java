@@ -32,7 +32,7 @@ public class ComponentManufacturersController {
 	    }
 
 	@PutMapping("/editComponentManufacturersDetails/{id}")
-	@Operation(description ="put api to edit ComponentManufacturers details by id")
+	@Operation(description ="Put api to edit ComponentManufacturers details by id")
 	public ComponentManufacturers updateComponentManufacturers(@PathVariable int id, @RequestBody ComponentManufacturers updatedComponentManufacturers) {
 		ComponentManufacturers componentManufacturers = componentManufacturersRepository.findById(id).orElse(null);
 	    if (componentManufacturers != null) {
@@ -44,13 +44,13 @@ public class ComponentManufacturersController {
 	}
 	
 	@DeleteMapping("/deleteComponentManufacturersDetails/{id}")
-	@Operation(description ="delete api to delete ComponentManufacturers details by id")
+	@Operation(description ="Delete api to delete ComponentManufacturers details by id")
 	public void deleteComponentManufacturers(@PathVariable int id) {
 		componentManufacturersRepository.deleteById(id);
 	}
 	
 	@GetMapping("/getComponentManufacturersDetails/{id}")
-	@Operation(description ="get api to get ComponentManufacturers details by id")
+	@Operation(description ="Get api to get ComponentManufacturers details by id")
 	public ResponseEntity<ComponentManufacturers> getComponentManufacturersById(@PathVariable int id) {
 	    Optional<ComponentManufacturers> componentManufacturersOptional = componentManufacturersRepository.findById(id);
 	    if (componentManufacturersOptional.isPresent()) {
