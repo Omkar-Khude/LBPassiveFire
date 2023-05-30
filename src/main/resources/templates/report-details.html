@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Report Details </title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Report Details </h1>
+    <table>
+        <thead>
+            <tr>
+                  <th>Door Ref.</th>
+                  <th>Location of Maintained DoorSet</th>
+			
+			<th>Description of Issues/Damage</th>
+			
+			<th>Grading Label Assigned</th>
+			<th>ARTs Required</th>
+			<th>Photo</th>
+			
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="door : ${doors}">
+                <td th:text="${door.id}"></td>
+                <td th:text="${door.location}"></td>
+                <td th:text="${door.notes}"></td>
+                <td th:text="${door.labels}"></td>
+                <td th:text="${door.artNo}"></td>
+                <td th:text="${door.picture}"></td>
+                
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+
+

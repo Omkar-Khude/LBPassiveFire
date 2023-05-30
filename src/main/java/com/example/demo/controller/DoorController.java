@@ -28,14 +28,14 @@ public class DoorController {
 	 @Operation(description ="Post api to add door details") 
 	 public ResponseEntity<Door> addDoorDetails(@RequestBody Door door) {
 	        if ("no".equals(door.getAccess())) {
-	            door.setFireRating(null);
-	           door.setLabels(null);
-	            door.setTestEvidence(null);
-	            door.setDoorReplacement(null);
-	            door.setArtNo(null);
+	            door.setFireRating("NA");
+	           door.setLabels("NA");
+	            door.setTestEvidence("NA");
+	            door.setDoorReplacement("NA");
+	            door.setArtNo("NA");
 	        } else if ("yes".equals(door.getAccess())) {
 	            if ("no".equals(door.getDoorReplacement())) {
-	                door.setArtNo(null);
+	                door.setArtNo("NA");
 	            }
 	        }
 
@@ -58,5 +58,7 @@ public class DoorController {
 		    	return doorRepository.findById(id);
 		    }
 		}
+	 
+	 
 
 }

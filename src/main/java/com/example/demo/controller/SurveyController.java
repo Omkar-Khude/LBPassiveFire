@@ -18,18 +18,6 @@ import com.example.demo.repository.SurveyRepository;
 import com.example.demo.service.SurveyService;
 import io.swagger.v3.oas.annotations.Operation;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import java.io.ByteArrayOutputStream;
-import java.util.Optional;
-
-
-
 @RestController
 @RequestMapping("/api")
 public class SurveyController {
@@ -82,45 +70,6 @@ public class SurveyController {
 	        
 	        return ResponseEntity.ok(updatedSurvey);
 	    }
-	 
-	 @GetMapping(value = "/report/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
-	    public ResponseEntity<byte[]> generateSurveyReport(@PathVariable int id) throws DocumentException {
-	        Optional<Survey> surveyOptional = surveyRepository.findById(id);
-	        if (surveyOptional.isPresent()) {
-	            Survey survey = surveyOptional.get();
-
-	           
-	            Document document = new Document();
-
-	            
-	            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-	            
-	            PdfWriter.getInstance(document, baos);
-
-	            
-	            document.open();
-
-	            
-	            document.add(new Paragraph("User Details"));
-	            document.add(new Paragraph("ID: " + survey.getId()));
-	            document.add(new Paragraph("SurveyType: " + survey.getSurveyType()));
-	            document.add(new Paragraph("SiteName: " + survey.getSiteName()));
-	            document.add(new Paragraph("SiteAddress: " + survey.getSiteAddress()));
-	            document.add(new Paragraph("DateTime: " + survey.getDateTime()));
-	            document.add(new Paragraph("Engineer: " + survey.getEngineer()));
-	            
-	            
-	            document.close();
-
-	            
-	            HttpHeaders headers = new HttpHeaders();
-	            headers.setContentType(MediaType.APPLICATION_PDF);
-	            headers.setContentDispositionFormData("attachment", "survey_report.pdf");
-
-	            
-	            return new ResponseEntity<>(baos.toByteArray(), headers, HttpStatus.OK);
-	        } else {
-	            return ResponseEntity.notFound().build();
-	        }}
+	
+	
 }
