@@ -3,30 +3,48 @@
 <head>
     <title>Report Details </title>
     <style>
-        table {
+       table {
             border-collapse: collapse;
             width: 100%;
+            
         }
+        
         th, td {
+            border: 1px solid black;
             padding: 8px;
+            height: 100px;
+        }
+        
+         th {
+            background-color: orange;
+        }
+        
+        .content {
+            padding-bottom: 50px;
+        }
+        
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
         }
     </style>
 </head>
+  <div class="content">
 <body>
     <h1>Report Details </h1>
     <table>
+     <div class="content">
         <thead>
             <tr>
                   <th>Door Ref.</th>
                   <th>Location of Maintained DoorSet</th>
-			
-			<th>Description of Issues/Damage</th>
-			
-			<th>Grading Label Assigned</th>
-			<th>ARTs Required</th>
-			<th>Photo</th>
+			      <th>Description of Issues/Damage</th>
+			      <th>Grading Label Assigned</th>
+			      <th>ARTs Required</th>
+			      <th>Photo</th>
 			
             </tr>
         </thead>
@@ -37,14 +55,13 @@
                 <td th:text="${door.notes}"></td>
                 <td th:text="${door.labels}"></td>
                 <td th:text="${door.artNo}"></td>
-                <td th:text="${door.picture}"></td>
+               <td class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="door photo" th:src="@{${door.getPicture}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
+            "/></td>
                 
             </tr>
         </tbody>
+      </div>  
     </table>
 </body>
 </html>
-
-
-
 
