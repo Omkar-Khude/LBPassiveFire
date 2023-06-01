@@ -1,67 +1,151 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Report Details </title>
-    <style>
-       table {
+<style>
+        .table1 table,
+        th,
+        td {
+            width: 50%;
+            border: 1px solid black;
             border-collapse: collapse;
-            width: 100%;
+        }
+        .table1{
+            width: 75%;
+        }
+
+        .table1 th {
+            background-color: rgba(228, 148, 0, 0.58);
+            text-align: left;
+            
+    
+        }
+        
+        .table2{
+            margin-top: 3em;
+            width: 150%;
             
         }
-        
-        th, td {
+
+        .content{
+            margin-top: 3em;
+            width: 600%;
+            
+            
+        }
+        .content table,
+        th,
+        td {
+            width: 15%;
             border: 1px solid black;
-            padding: 8px;
-            height: 100px;
+            border-collapse: collapse;
+
         }
-        
-         th {
-            background-color: orange;
+       .content th {
+            background-color: rgba(228, 148, 0, 0.58);
         }
-        
-        .content {
-            padding-bottom: 50px;
+        .logo {
+           
+            top: 1px;
+            left: 1px;
+            width: 400px;
+            height: auto; 
         }
-        
-        footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            padding: 10px;
-            text-align: left;
-        }
+        .logo1 {
+           
+           top: 1px;
+           right: 1px;
+           width: 200px;
+           height: auto; 
+       }
+
+       
+     
     </style>
 </head>
-  <div class="content">
-<body>
-    <h1>Report Details </h1>
-    <table>
-     <div class="content">
-        <thead>
-            <tr>
-                  <th>Door Ref.</th>
-                  <th>Location of Maintained DoorSet</th>
-			      <th>Description of Issues/Damage</th>
-			      <th>Grading Label Assigned</th>
-			      <th>ARTs Required</th>
-			      <th>Photo</th>
-			
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="door : ${doors}">
-                <td th:text="${door.id}"></td>
-                <td th:text="${door.location}"></td>
-                <td th:text="${door.notes}"></td>
-                <td th:text="${door.labels}"></td>
-                <td th:text="${door.artNo}"></td>
-               <td class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="door photo" th:src="@{${door.getPicture}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
-            "/></td>
-                
-            </tr>
-        </tbody>
-      </div>  
-    </table>
-</body>
-</html>
 
+<body>
+    
+    <div class="table1">
+        <img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report_logo.png" alt="Logo" class="logo"></img>
+        <img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report.png" alt="Logo" class="logo1"></img>  
+    <table>
+       
+            <tr>
+                <th class="names">RMA form sequential reference number:</th>
+                <td>00001</td>
+            </tr>
+            <tr>
+                <th>Company Name:</th>
+                <td>LB Passive Fire ltd.</td>
+            </tr>
+            <tr>
+                <th>Approved Maintainer’s name:</th>
+                <td>Ivayio Ivanov</td>
+            </tr>
+             <tr>
+                <th>Approved Maintainer’s number: </th>
+                <td>883</td>
+            </tr>
+             <tr>
+                <th>Site Address:</th>
+                <td>value2</td>
+            </tr>
+             <tr>
+                <th>Maintenance Job Reference:</th>
+                <td>value2</td>
+            </tr>
+             <tr>
+                <th>Date of issue: </th>
+                <td>value2</td>
+            </tr>
+        </table>
+
+ 
+    </div>
+
+    <div class="table1 table2">
+        <table>
+           
+                <tr>
+                    <th><br><u>Declaration</u></br> 
+I declare that the work undertaken fully complies with the requirements of the Q-Mark Fire 
+Door Maintenance scheme and that the work undertaken complies with any local regulations 
+in force at the specific job site location that do not conflict with scheme requirements</th>
+                    <td><br><u>Signature</u></br>
+                        <img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report_sign.png" alt="Image"></img></td>
+                </tr>
+            </table>
+    
+     
+        </div>
+        <div class="content">
+        <table>
+           
+               <thead>
+                   <tr>
+                         <th>Door Ref.</th>
+                         <th>Location of Maintained DoorSet</th>
+                         <th>Description of Issues/Damage</th>
+                         <th>Grading Label Assigned</th>
+                         <th>ARTs Required</th>
+                         <th>Photo</th>
+                   
+                   </tr>
+               </thead>
+               <tbody>
+                   <tr th:each="door : ${doors}">
+                       <td th:text="${door.id}"></td>
+                       <td th:text="${door.location}"></td>
+                       <td th:text="${door.notes}"></td>
+                       <td th:text="${door.labels}"></td>
+                       <td th:text="${door.artNo}"></td>
+                      <td class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="door photo" th:src="@{${door.getPicture}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
+                   "/></td>
+                       
+                   </tr>
+               </tbody>
+             
+           </table>
+        </div> 
+    </body>
+    </html>

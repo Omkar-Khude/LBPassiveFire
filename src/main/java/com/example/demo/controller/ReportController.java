@@ -16,6 +16,7 @@ import org.thymeleaf.context.Context;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 import com.example.demo.Entity.Door;
 import com.example.demo.repository.DoorRepository;
+import com.example.demo.repository.SurveyRepository;
 import com.lowagie.text.DocumentException;
 
 
@@ -26,12 +27,15 @@ public class ReportController {
 	
 	private DoorRepository doorRepository;
 	
+	private SurveyRepository surveyRepository;
+	
 	
 	 private TemplateEngine templateEngine;
 	 @Autowired
-	    public ReportController(TemplateEngine templateEngine, DoorRepository doorRepository) {
+	    public ReportController(TemplateEngine templateEngine, DoorRepository doorRepository, SurveyRepository surveyRepository) {
 	        this.templateEngine = templateEngine;
 	        this.doorRepository = doorRepository;
+	        this.surveyRepository = surveyRepository;
 	    }
     
 	@GetMapping("/report")
