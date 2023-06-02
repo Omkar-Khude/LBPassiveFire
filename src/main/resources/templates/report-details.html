@@ -1,73 +1,97 @@
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
 <style>
-        .table1 table,
-        th,
-        td {
+
+.table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+   .table td {
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .logo {
+        width: 150px;
+        height: 50px;
+    }
+        .table1 {
             width: 50%;
-            border: 1px solid black;
             border-collapse: collapse;
+            
         }
-        .table1{
-            width: 75%;
+        .table1 td{
+            font-size: 12px; 
+            border: 1px solid black;
+              
         }
 
         .table1 th {
-            background-color: rgba(228, 148, 0, 0.58);
+            background-color: orange;
             text-align: left;
+            font-size: 12px;
+            border: 1px solid black;
             
-    
         }
         
         .table2{
-            margin-top: 3em;
-            width: 150%;
+            margin-top: -2em;
+            width: 40%;
+            border-collapse: collapse;
+            padding: 50px; 
+           height: 10%;
+            
+        }
+
+        .table2 td{
+            font-size: 12px; 
+            border: 1px solid black;
+        }
+
+        .table2 th {
+            background-color: orange;
+            text-align: left;
+            font-size: 12px;
+            border: 1px solid black;
             
         }
 
         .content{
-            margin-top: 3em;
-            width: 600%;
-            
-            
-        }
-        .content table,
-        th,
-        td {
-            width: 15%;
-            border: 1px solid black;
+            margin-top: -1em;
+            width: 100%; 
             border-collapse: collapse;
-
+            
         }
+        
        .content th {
-            background-color: rgba(228, 148, 0, 0.58);
+            background-color: orange;
+            border: 1px solid black;
         }
-        .logo {
-           
-            top: 1px;
-            left: 1px;
-            width: 400px;
-            height: auto; 
-        }
-        .logo1 {
-           
-           top: 1px;
-           right: 1px;
-           width: 200px;
-           height: auto; 
-       }
 
-       
-     
+        .content td{
+            text-align: center;
+            border: 1px solid black;
+        }
+        
+
     </style>
 </head>
 
 <body>
-    
+    <div class="table">
+    <table>
+        <tr>
+            <td><img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report_logo.png" alt="Logo" class="logo"></img></td>
+            <td><br><b>Q-Mark Fire Door Maintenance Scheme</b></br><b> Record 
+                of Maintenance Activities</b></td>
+            <td><img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report.png" alt="Logo" class="logo"></img></td>
+        </tr>
+    </table>
+</div>
     <div class="table1">
-        <img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report_logo.png" alt="Logo" class="logo"></img>
-        <img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report.png" alt="Logo" class="logo1"></img>  
+        
     <table>
        
             <tr>
@@ -103,14 +127,14 @@
  
     </div>
 
-    <div class="table1 table2">
+    <div class="table2">
         <table>
            
                 <tr>
-                    <th><br><u>Declaration</u></br> 
-I declare that the work undertaken fully complies with the requirements of the Q-Mark Fire 
+                    <th><u>Declaration</u> 
+                        <br>I declare that the work undertaken fully complies with the requirements of the Q-Mark Fire 
 Door Maintenance scheme and that the work undertaken complies with any local regulations 
-in force at the specific job site location that do not conflict with scheme requirements</th>
+in force at the specific job site location that do not conflict with scheme requirements</br></th>
                     <td><br><u>Signature</u></br>
                         <img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report_sign.png" alt="Image"></img></td>
                 </tr>
@@ -121,7 +145,7 @@ in force at the specific job site location that do not conflict with scheme requ
         <div class="content">
         <table>
            
-               <thead>
+               <!-- <thead> -->
                    <tr>
                          <th>Door Ref.</th>
                          <th>Location of Maintained DoorSet</th>
@@ -131,8 +155,8 @@ in force at the specific job site location that do not conflict with scheme requ
                          <th>Photo</th>
                    
                    </tr>
-               </thead>
-               <tbody>
+               <!-- </thead> -->
+               <!-- <tbody> -->
                    <tr th:each="door : ${doors}">
                        <td th:text="${door.id}"></td>
                        <td th:text="${door.location}"></td>
@@ -143,7 +167,7 @@ in force at the specific job site location that do not conflict with scheme requ
                    "/></td>
                        
                    </tr>
-               </tbody>
+               <!-- </tbody> -->
              
            </table>
         </div> 
