@@ -14,16 +14,18 @@
     }
     
     .logo {
-        width: 150px;
+        width: 200px;
         height: 50px;
     }
-        .table1 {
-            width: 50%;
+      
+        .table1 table {
+            width: 100%;
             border-collapse: collapse;
             
         }
         .table1 td{
             font-size: 12px; 
+            width: 60%;
             border: 1px solid black;
               
         }
@@ -37,8 +39,17 @@
         }
         
         .table2{
+        padding: 50px; 
+        }
+        
+        .table2 img{
+        width: 100px;
+        height: 40px;
+        
+        }
+        .table2 table{
             margin-top: -2em;
-            width: 40%;
+            width: 100%;
             border-collapse: collapse;
             padding: 50px; 
            height: 10%;
@@ -51,14 +62,14 @@
         }
 
         .table2 th {
-            background-color: orange;
+            
             text-align: left;
             font-size: 12px;
             border: 1px solid black;
             
         }
 
-        .content{
+        .content table{
             margin-top: -1em;
             width: 100%; 
             border-collapse: collapse;
@@ -66,15 +77,34 @@
         }
         
        .content th {
+       font-size: 12px;
+        text-align: center;
             background-color: orange;
             border: 1px solid black;
         }
 
         .content td{
+         font-size: 14px;
             text-align: center;
             border: 1px solid black;
         }
         
+         .footer {
+         font-size: 14px;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            text-align: left;
+        }
+        
+        .page-number {
+        font-size: 14px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
 
     </style>
 </head>
@@ -84,8 +114,8 @@
     <table>
         <tr>
             <td><img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report_logo.png" alt="Logo" class="logo"></img></td>
-            <td><br><b>Q-Mark Fire Door Maintenance Scheme</b></br><b> Record 
-                of Maintenance Activities</b></td>
+            <td><b>Q-Mark Fire Door Maintenance Scheme</b><br><b> Record 
+                of Maintenance Activities</b></br></td>
             <td><img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report.png" alt="Logo" class="logo"></img></td>
         </tr>
     </table>
@@ -96,7 +126,7 @@
        
             <tr>
                 <th class="names">RMA form sequential reference number:</th>
-                <td>00001</td>
+                <td th:text="${reportNumber}"></td>
             </tr>
             <tr>
                 <th>Company Name:</th>
@@ -112,15 +142,15 @@
             </tr>
              <tr>
                 <th>Site Address:</th>
-                <td>value2</td>
+                <td th:text="${survey.siteAddress}"></td>
             </tr>
              <tr>
                 <th>Maintenance Job Reference:</th>
-                <td>value2</td>
+                <td>-</td>
             </tr>
              <tr>
                 <th>Date of issue: </th>
-                <td>value2</td>
+                <td th:text="${survey.dateTime}"></td>
             </tr>
         </table>
 
@@ -131,12 +161,12 @@
         <table>
            
                 <tr>
-                    <th><u>Declaration</u> 
+                    <th><u><b>Declaration</b></u> 
                         <br>I declare that the work undertaken fully complies with the requirements of the Q-Mark Fire 
 Door Maintenance scheme and that the work undertaken complies with any local regulations 
 in force at the specific job site location that do not conflict with scheme requirements</br></th>
-                    <td><br><u>Signature</u></br>
-                        <img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report_sign.png" alt="Image"></img></td>
+                    <td><br><u><b>Signature</b></u></br>
+                        <img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report_sign.png" alt="Image" class="img"></img></td>
                 </tr>
             </table>
     
@@ -150,6 +180,7 @@ in force at the specific job site location that do not conflict with scheme requ
                          <th>Door Ref.</th>
                          <th>Location of Maintained DoorSet</th>
                          <th>Description of Issues/Damage</th>
+                         <th>Door Condition Survey Completed By</th>
                          <th>Grading Label Assigned</th>
                          <th>ARTs Required</th>
                          <th>Photo</th>
@@ -161,6 +192,7 @@ in force at the specific job site location that do not conflict with scheme requ
                        <td th:text="${door.id}"></td>
                        <td th:text="${door.location}"></td>
                        <td th:text="${door.notes}"></td>
+                       <td th:text="${survey.engineer}"></td>
                        <td th:text="${door.labels}"></td>
                        <td th:text="${door.artNo}"></td>
                       <td class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="door photo" th:src="@{${door.getPicture}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
@@ -171,5 +203,11 @@ in force at the specific job site location that do not conflict with scheme requ
              
            </table>
         </div> 
+        
+        <div class="footer">
+        <p>LB Passive Fire Ltd</p>
+    </div>
+    
+     <div class="page-number">Page <span th:text="${pageNumber}"></span></div>
     </body>
     </html>

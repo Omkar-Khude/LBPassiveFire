@@ -70,5 +70,10 @@ public class SurveyService {
 
         return survey;
     }
+	
+	 public Survey getSurveyById(Integer id) {
+	        return surveyRepository.findById(id)
+	                .orElseThrow(() -> new NotFoundException("Survey not found with id " + id));
+	    }
 
 }

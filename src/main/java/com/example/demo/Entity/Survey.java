@@ -1,9 +1,12 @@
 package com.example.demo.Entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +20,10 @@ public class Survey {
 	private String siteAddress;
 	private String dateTime;
 	private String engineer;
+	
+	@OneToMany(mappedBy = "survey")
+    private List<Door> doors = new ArrayList<>();
+	
 	public int getId() {
 		return id;
 	}
@@ -52,6 +59,12 @@ public class Survey {
 	}
 	public void setSiteAddress(String siteAddress) {
 		this.siteAddress = siteAddress;
+	}
+	public List<Door> getDoors() {
+		return doors;
+	}
+	public void setDoors(List<Door> doors) {
+		this.doors = doors;
 	}
 
 }
