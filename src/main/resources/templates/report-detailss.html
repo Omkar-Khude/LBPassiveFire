@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<style>
+
+.table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+   .table td {
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .logo {
+        width: 200px;
+        height: 50px;
+    }
+      
+        .table1 table {
+            width: 100%;
+            border-collapse: collapse;
+            
+        }
+        .table1 td{
+            font-size: 12px; 
+            width: 60%;
+            border: 1px solid black;
+              
+        }
+
+        .table1 th {
+            background-color: orange;
+            text-align: left;
+            font-size: 12px;
+            border: 1px solid black;
+            
+        }
+        
+        .table2{
+        padding: 50px; 
+        }
+        
+        .table2 img{
+        width: 100px;
+        height: 40px;
+        
+        }
+        .table2 table{
+            margin-top: -2em;
+            width: 100%;
+            border-collapse: collapse;
+            padding: 50px; 
+           height: 10%;
+            
+        }
+
+        .table2 td{
+            font-size: 12px; 
+            border: 1px solid black;
+        }
+
+        .table2 th {
+            
+            text-align: left;
+            font-size: 12px;
+            border: 1px solid black;
+            
+        }
+
+        .table3 table{
+            margin-top: -2em;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table3 th{
+            width: 50%;
+            background-color: orange;
+            text-align: centre;
+            font-size: 12px;
+            border: 1px solid black;
+        }
+
+        .table4 table{
+            margin-top: -0.1em;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table4 th{
+            width: 25%;
+            background-color: orange;
+            text-align: centre;
+            font-size: 12px;
+            border: 1px solid black;
+        }
+        .table4 td{
+            border: 1px solid black;     
+        }
+        .table4 img{
+        width: 100px;
+        height: 40px;
+        }
+        .table5 table{
+            margin-top:-0.1em;
+            width: 100%; 
+            border-collapse: collapse;   
+        } 
+       .table5 th {
+       font-size: 12px;
+        text-align: center;
+            background-color: orange;
+            border: 1px solid black;
+        }
+        .table5 td{
+         font-size: 14px;
+            text-align: center;
+            border: 1px solid black;
+        }
+       
+       
+         .footer {
+         font-size: 14px;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            text-align: left;
+        }
+        
+        .page-number {
+        font-size: 14px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="table">
+    <table>
+        <tr>
+            <td><img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report_logo.png" alt="Logo" class="logo"></img></td>
+            <td><b>Q-Mark Fire Door Maintenance Scheme</b><br><b> Record 
+                of Maintenance Activities</b></br></td>
+            <td><img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report.png" alt="Logo" class="logo"></img></td>
+        </tr>
+    </table>
+</div>
+    <div class="table1">
+        
+    <table>
+       
+            <tr>
+                <th class="names">RMA form sequential reference number:</th>
+                <td th:text="${reportNumber}"></td>
+            </tr>
+            <tr>
+                <th>Company Name:</th>
+                <td>LB Passive Fire ltd.</td>
+            </tr>
+            <tr>
+                <th>Approved Maintainer’s name:</th>
+                <td>Ivayio Ivanov</td>
+            </tr>
+             <tr>
+                <th>Approved Maintainer’s number: </th>
+                <td>883</td>
+            </tr>
+             <tr>
+                <th>Site Address:</th>
+                <td th:text="${survey.siteAddress}"></td>
+            </tr>
+             <tr>
+                <th>Maintenance Job Reference:</th>
+                <td>-</td>
+            </tr>
+             <tr>
+                <th>Date of issue: </th>
+                <td th:text="${survey.dateTime}"></td>
+            </tr>
+        </table>
+
+ 
+    </div>
+
+    <div class="table2">
+        <table>
+           
+                <tr>
+                    <th><u><b>Declaration</b></u> 
+                        <br>I declare that the work undertaken fully complies with the requirements of the Q-Mark Fire 
+Door Maintenance scheme and that the work undertaken complies with any local regulations 
+in force at the specific job site location that do not conflict with scheme requirements</br></th>
+                    <td><br><u><b>Signature</b></u></br>
+                        <img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report_sign.png" alt="Image" class="img"></img></td>
+                </tr>
+            </table>
+    
+        </div>
+
+        <div class="table3">
+            <table>
+                    <tr>
+                        <th>SURVEY AND INSPECTION</th>
+                        <th>MAINTENANCE</th>
+                    </tr>
+                    </table>
+                    </div>
+            <div class="table4">
+                        <table>
+                                <tr>
+                                    <th>Confirmation Survey complete:</th>
+                                    <td><img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report_sign.png" alt="Image" class="img"></img></td>
+                                    <th>Confirmation Maintenace complete:</th>
+                                    <td><img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report_sign.png" alt="Image" class="img"></img></td>
+                                </tr>
+                                </table>
+                                </div>
+                                <div class="table5">
+                                    <table>
+                                       
+                                           
+                                               <tr>
+                                                     <th>Door Ref.</th>
+                                                     <th>Location of Maintained DoorSet</th>
+                                                     <th>Description of Issues/Damage</th>
+                                                     <th>Door Condition Survey Completed By</th>
+                                                     <th>Grading Label Assigned</th>
+                                                     <th>ARTs Required</th>
+                                                     <th>ARTs completed</th>
+                                                     <th>ART Rev No.</th>
+                                                     <th>Maintenance label fitted Y/N</th>
+                                                     <th>Maintained date</th>
+                                                     <th>Maintenance by</th>
+                                                     <th>Next Maintenance due</th>
+                                                     <th>Comments</th>
+
+                                               
+                                               </tr>
+                                           
+                                               <tr th:each="door : ${doors}">
+                                                   <td th:text="${door.id}"></td>
+                                                   <td th:text="${door.location}"></td>
+                                                   <td th:text="${door.notes}"></td>
+                                                   <td th:text="${survey.engineer}"></td>
+                                                   <td th:text="${door.labels}"></td>
+                                                   <td th:text="${door.artNo}"></td>
+                                                  <!-- <td class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="door photo" th:src="@{${door.getPicture}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
+                                               "/></td> -->
+                                               <td th:text="${door.artNo}"></td>
+                                               <td th:text="${door.artNo}"></td>
+                                               <td th:text="${door.artNo}"></td>
+                                               <td th:text="${door.artNo}"></td>
+                                               <td>Ivayio Ivanov</td>
+                                               <td th:text="${door.artNo}"></td>
+                                               <td th:text="${door.artNo}"></td>
+   
+                                               </tr>
+                                               <tr>
+                                                <td colspan="2">Before Photo</td>
+                                                <td colspan="4" class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="door photo" th:src="@{${door.getPicture}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
+                                                    "/></td>
+                                                <td colspan="2">After Photo</td>
+                                                <td colspan="5" class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="door photo" th:src="@{${door.getPicture}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
+                                                    "/></td>
+                                            </tr>
+                                           
+                                         
+                                       </table>
+                                    </div>
+                                           
+                                    
+        <div class="footer">
+        <p>LB Passive Fire Ltd</p>
+    </div>
+    
+     <div class="page-number">Page <span th:text="${pageNumber}"></span></div>
+    </body>
+    </html>
