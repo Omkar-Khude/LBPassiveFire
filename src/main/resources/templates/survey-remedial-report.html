@@ -84,7 +84,7 @@
         }
 
         .table4 table{
-            margin-top: -0.1em;
+            margin-top: -0.03em;
             width: 100%;
             border-collapse: collapse;
         }
@@ -105,7 +105,7 @@
         }
         .table5 table{
             margin-top:-0.1em;
-            width: 100%; 
+            width: 80%; 
             border-collapse: collapse;   
         } 
        .table5 th {
@@ -238,7 +238,6 @@ in force at the specific job site location that do not conflict with scheme requ
                                                      <th>Maintenance label fitted Y/N</th>
                                                      <th>Maintained date</th>
                                                      <th>Maintenance by</th>
-                                                     <th>Next Maintenance due</th>
                                                      <th>Comments</th>
 
                                                
@@ -251,23 +250,22 @@ in force at the specific job site location that do not conflict with scheme requ
                                                    <td th:text="${survey.engineer}"></td>
                                                    <td th:text="${door.labels}"></td>
                                                    <td th:text="${door.artNo}"></td>
-                                                  <!-- <td class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="door photo" th:src="@{${door.getPicture}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
-                                               "/></td> -->
-                                               <td th:text="${door.artNo}"></td>
-                                               <td th:text="${door.artNo}"></td>
-                                               <td th:text="${door.artNo}"></td>
-                                               <td th:text="${door.artNo}"></td>
+                                               <td></td>
+                                               <td><span th:each="remediation : ${door.survey.remediations}" th:text="${remediation.artNo}"></span></td>
+                                               <td>Y/N</td>
+                                               <td></td>
                                                <td>Ivayio Ivanov</td>
-                                               <td th:text="${door.artNo}"></td>
-                                               <td th:text="${door.artNo}"></td>
-   
+                                               <td><span th:each="remediation : ${door.survey.remediations}" th:text="${remediation.details}"></span></td>
+                          
                                                </tr>
-                                               <tr>
+                                               <tr th:each="remediation : ${remediations}">
                                                 <td colspan="2">Before Photo</td>
-                                                <td colspan="4" class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="door photo" th:src="@{${door.getPicture}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
+                                                 <td colspan="4" class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="door photo" th:src="@{${remediation.getBeforePhoto}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
                                                     "/></td>
+                                                 
+                                                    
                                                 <td colspan="2">After Photo</td>
-                                                <td colspan="5" class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="door photo" th:src="@{${door.getPicture}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
+                                                <td colspan="4" class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="door photo" th:src="@{${remediation.getAfterPhoto}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
                                                     "/></td>
                                             </tr>
                                            

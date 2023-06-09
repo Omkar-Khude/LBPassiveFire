@@ -18,6 +18,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 import com.example.demo.Entity.Door;
+import com.example.demo.Entity.Remediation;
 import com.example.demo.Entity.Survey;
 import com.example.demo.repository.DoorRepository;
 import com.example.demo.repository.SurveyRepository;
@@ -37,17 +38,15 @@ public class ReportController {
 	    public ReportController(TemplateEngine templateEngine, DoorRepository doorRepository, SurveyRepository surveyRepository) {
 	        this.templateEngine = templateEngine;
 	        this.doorRepository = doorRepository;
-	        this.surveyRepository =surveyRepository;
-	       
-	        
+	        this.surveyRepository =surveyRepository;   
 	    }
     
-   
-	 @GetMapping("/generateReport")
-	 @Operation(description ="Get api to generate report by surveyAddress") 
-	 public ResponseEntity<byte[]> generateReport(@RequestParam("siteAddress") String siteAddress) {
+   	 
+	 @GetMapping("/report")
+	 @Operation(description ="Get api to generate survey report and survey remedial report by surveyAddress and reportType")
+	 public ResponseEntity<byte[]> generateReport(@RequestParam("siteAddress") String siteAddress, @RequestParam("reportType") String reportType) {
 	     try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-	         String htmlContent = generateHtmlReport(siteAddress);
+	         String htmlContent = generateHtmlReport(siteAddress, reportType);
 	         ITextRenderer renderer = new ITextRenderer();
 	         renderer.setDocumentFromString(htmlContent);
 	         renderer.layout();
@@ -65,7 +64,7 @@ public class ReportController {
 	     }
 	 }
 
-	 private String generateHtmlReport(String siteAddress) {
+	 private String generateHtmlReport(String siteAddress, String reportType) {
 	     Optional<Survey> surveyOptional = surveyRepository.findBySiteAddress(siteAddress);
 	     if (surveyOptional.isPresent()) {
 	         Survey survey = surveyOptional.get();
@@ -74,10 +73,22 @@ public class ReportController {
 	         context.setVariable("survey", survey);
 	         context.setVariable("doors", doors);
 	         context.setVariable("reportNumber", String.format("%05d", reportCounter.getAndIncrement()));
-	         context.setVariable("pageNumber", 1); 
-	         return templateEngine.process("report-details", context);
+	         context.setVariable("pageNumber", 1);
+
+	         if (reportType.equalsIgnoreCase("surveyReport")) {
+	             return templateEngine.process("report-details", context);
+	         } else if (reportType.equalsIgnoreCase("surveyRemedialReport")) {
+	             List<Remediation> remediations = survey.getRemediations();
+	             context.setVariable("remediations", remediations);
+	             return templateEngine.process("survey-remedial-report", context);
+	         } else {
+	             throw new IllegalArgumentException("Invalid report type: " + reportType);
+	         }
 	     } else {
 	         throw new IllegalArgumentException("Survey not found with siteAddress: " + siteAddress);
 	     }
-    
-}}
+	 }
+
+	 
+
+}

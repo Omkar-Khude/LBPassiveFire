@@ -8,4 +8,5 @@ import com.example.demo.Entity.Remediation;
 public interface RemediationRepository extends JpaRepository<Remediation, Integer> {
 
 	Remediation findById(int id);
+
 }

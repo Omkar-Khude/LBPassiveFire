@@ -1,9 +1,12 @@
 package com.example.demo.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,7 +26,12 @@ public class Remediation {
 	private String beforePhoto;
 	
 	private String afterPhoto;
-
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "survey_id")
+    private Survey survey;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -71,5 +79,14 @@ public class Remediation {
 	public void setAfterPhoto(String afterPhoto) {
 		this.afterPhoto = afterPhoto;
 	}
+
+	public Survey getSurvey() {
+		return survey;
+	}
+
+	public void setSurvey(Survey survey) {
+		this.survey = survey;
+	}
+
 
 }
