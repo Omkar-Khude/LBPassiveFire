@@ -78,13 +78,13 @@
         .table3 th{
             width: 15%;
             background-color: orange;
-            text-align: centre;
+            text-align: center;
             font-size: 12px;
             border: 1px solid black;
         }
 
         .table3 td{
-            text-align: centre;
+            text-align: center;
             font-size: 12px;
             border: 1px solid black;
         }
@@ -186,14 +186,14 @@
                                     <th>Intended Fire Resistance Period</th>
                                     <th>Photo</th>
                     </tr>
-                    <tr th:each="door : ${doors}">
-                        <td th:text="${survey.dateTime}"></td>
-                        <td th:text="${survey.dateTime}"></td>
-                        <td th:text="${survey.dateTime}"></td>
-                        <td th:text="${survey.dateTime}"></td>
-                        <td th:text="${survey.dateTime}"></td>
-                        <td th:text="${survey.dateTime}"></td>
-                        <td class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="photo" th:src="@{${door.getPicture}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
+                    <tr th:each="fireRisk : ${fireRisks}">
+                        <td th:text="${fireRisk.id}"></td>
+                        <td th:text="${fireRisk.apertureSize}"></td>
+                        <td th:text="${fireRisk.descriptionOfFireRatedRisk}"></td>
+                        <td th:text="${fireRisk.componentManufacturer}"></td>
+                        <td th:text="${fireRisk.approvedRemedialWorks}"></td>
+                        <td th:text="${fireRisk.intendedFireResistancePeriod}"></td>
+                        <td class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="photo" th:src="@{${fireRisk.getPhoto}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
                             "/></td>
                         </tr>
                     </table>

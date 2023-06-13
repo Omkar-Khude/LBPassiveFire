@@ -18,9 +18,9 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 import com.example.demo.Entity.Door;
+import com.example.demo.Entity.FireRisk;
 import com.example.demo.Entity.Remediation;
 import com.example.demo.Entity.Survey;
-import com.example.demo.repository.DoorRepository;
 import com.example.demo.repository.SurveyRepository;
 import com.lowagie.text.DocumentException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,14 +30,12 @@ import io.swagger.v3.oas.annotations.Operation;
 @RequestMapping("/api")
 public class ReportController {
 	
-	private DoorRepository doorRepository;
 	private AtomicInteger reportCounter = new AtomicInteger(1);
 	private SurveyRepository surveyRepository;
 	 private TemplateEngine templateEngine;
 	 @Autowired
-	    public ReportController(TemplateEngine templateEngine, DoorRepository doorRepository, SurveyRepository surveyRepository) {
+	    public ReportController(TemplateEngine templateEngine,SurveyRepository surveyRepository) {
 	        this.templateEngine = templateEngine;
-	        this.doorRepository = doorRepository;
 	        this.surveyRepository =surveyRepository;   
 	    }
     
@@ -77,6 +75,12 @@ public class ReportController {
 
 	         if (reportType.equalsIgnoreCase("surveyReport")) {
 	             return templateEngine.process("report-details", context);
+	         }
+	             else if(reportType.equalsIgnoreCase("fireStoppingReport")) {
+	            	 List<FireRisk> fireRisks = survey.getFireRisks();
+		             context.setVariable("fireRisks", fireRisks);
+		             return templateEngine.process("fire-stopping", context); 
+	             
 	         } else if (reportType.equalsIgnoreCase("surveyRemedialReport")) {
 	             List<Remediation> remediations = survey.getRemediations();
 	             context.setVariable("remediations", remediations);

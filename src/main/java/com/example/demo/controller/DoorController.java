@@ -13,7 +13,6 @@ import com.example.demo.Entity.Door;
 import com.example.demo.Entity.Survey;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.repository.DoorRepository;
-import com.example.demo.repository.SurveyRepository;
 import com.example.demo.service.DoorService;
 import com.example.demo.service.SurveyService;
 
@@ -22,8 +21,6 @@ import io.swagger.v3.oas.annotations.Operation;
 @RestController
 @RequestMapping("/api")
 public class DoorController {
-	@Autowired
-	private SurveyRepository surveyRepository;
 	
 	@Autowired
 	private DoorRepository doorRepository;

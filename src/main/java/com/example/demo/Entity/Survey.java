@@ -27,6 +27,9 @@ public class Survey {
 	@OneToMany(mappedBy = "survey")
     private List<Remediation> remediations = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "survey")
+    private List<FireRisk> fireRisks = new ArrayList<>();
+	
 	public int getId() {
 		return id;
 	}
@@ -74,6 +77,12 @@ public class Survey {
 	}
 	public void setRemediations(List<Remediation> remediations) {
 		this.remediations = remediations;
+	}
+	public List<FireRisk> getFireRisks() {
+		return fireRisks;
+	}
+	public void setFireRisks(List<FireRisk> fireRisks) {
+		this.fireRisks = fireRisks;
 	}
 	
 }
