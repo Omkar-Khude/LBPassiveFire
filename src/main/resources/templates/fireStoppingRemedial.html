@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<style>
+
+.table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+   .table td {
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .logo {
+        width: 200px;
+        height: 50px;
+    }
+      
+        .table1 table {
+            width: 100%;
+            border-collapse: collapse;
+            
+        }
+        .table1 td{
+            font-size: 12px; 
+            width: 60%;
+            border: 1px solid black;
+              
+        }
+
+        .table1 th {
+            background-color: orange;
+            text-align: left;
+            font-size: 12px;
+            border: 1px solid black;
+            
+        }
+        
+        .table2{
+        padding: 50px; 
+        }
+        
+        .table2 img{
+        width: 100px;
+        height: 40px;
+        
+        }
+        .table2 table{
+            margin-top: -2em;
+            width: 100%;
+            border-collapse: collapse;
+            padding: 50px; 
+           height: 10%;
+            
+        }
+
+        .table2 td{
+            font-size: 12px; 
+            border: 1px solid black;
+        }
+
+        .table2 th {
+            
+            text-align: left;
+            font-size: 12px;
+            border: 1px solid black;
+            
+        }
+
+        .table3 table{
+            margin-top: -2em;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table3 th{
+            width: 10%;
+            background-color: orange;
+            text-align: centre;
+            font-size: 12px;
+            border: 1px solid black;
+        }
+
+        .table3 td{
+            text-align: centre;
+            font-size: 12px;
+            border: 1px solid black;
+        }
+         .footer {
+         font-size: 14px;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            text-align: left;
+        }
+        
+        .page-number {
+        font-size: 14px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="table">
+    <table>
+        <tr>
+            <td><img src="https://bucketlb.s3.eu-west-2.amazonaws.com/report_logo.png" alt="Logo" class="logo"></img></td>
+            <td><b>Q-Mark Fire Stopping Record </b><br><b> of Installation 
+                Activities</b></br></td>
+            <td><img src="https://bucketlb.s3.eu-west-2.amazonaws.com/FSReportLogo.png" alt="Logo" class="logo"></img></td>
+        </tr>
+    </table>
+</div>
+    <div class="table1">
+        
+    <table>
+       
+            <tr>
+                <th class="names">RMA form sequential reference number:</th>
+                <td th:text="${reportNumber}"></td>
+            </tr>
+            <tr>
+                <th>Company Name:</th>
+                <td>LB Passive Fire ltd.</td>
+            </tr>
+            <tr>
+                <th>Approved Maintainer’s name:</th>
+                <td>Costin Petrea</td>
+            </tr>
+             <tr>
+                <th>Approved Maintainer’s number: </th>
+                <td>516</td>
+            </tr>
+             <tr>
+                <th>Site Address:</th>
+                <td th:text="${survey.siteAddress}"></td>
+            </tr>
+             <tr>
+                <th>Maintenance Job Reference:</th>
+                <td>-</td>
+            </tr>
+             <tr>
+                <th>Date of issue: </th>
+                <td th:text="${survey.dateTime}"></td>
+            </tr>
+        </table>
+
+ 
+    </div>
+
+    <div class="table2">
+        <table>
+           
+                <tr>
+                    <th><u><b>Declaration</b></u> 
+                        <br>I declare that the work undertaken fully complies with the requirements of the Q-Mark Fire 
+                        Stopping Installation scheme and that the work undertaken complies with Regulation 4 and 7 
+                        of the Building Regulations for England and Wales or in accordance with the local 
+                        regulations in force at the specific job site location.</br></th>
+                    <td><br><u><b>Signature</b></u></br>
+                        <img src="https://bucketlb.s3.eu-west-2.amazonaws.com/fs_report_sign.png" alt="Image" class="img"></img></td>
+                </tr>
+            </table>
+    
+        </div>
+
+        <div class="table3">
+            <table>
+                    <tr>
+                        <th>Install 
+                            Job 
+                            Ref.</th>
+                        <th>Location 
+                            Size</th>
+                            <th>Fire Rated Risk</th>
+                                <th>Seal Category</th>
+                                    <th>Approved Remedial Works</th>
+                                    <th>Intended Fire Resistance Period</th>
+                                    <th>Component Manufacture</th>
+                                    <th>Before Photo</th>
+                                    <th>Installation Date/Installer</th>
+                                    <th>After Photo</th>
+                    </tr>
+                    <tr th:each="door : ${doors}">
+                        <td th:text="${survey.dateTime}"></td>
+                        <td th:text="${survey.dateTime}"></td>
+                        <td th:text="${survey.dateTime}"></td>
+                        <td th:text="${survey.dateTime}"></td>
+                        <td th:text="${survey.dateTime}"></td>
+                        <td th:text="${survey.dateTime}"></td>
+                        <td th:text="${survey.dateTime}"></td>
+                        <td class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="photo" th:src="@{${door.getPicture}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
+                            "/></td>
+                            <td th:text="${survey.dateTime}"></td>
+                            <td class="dynamicrow" style=" page-break-inside: avoid;  height: 100px;text-align: center;"><img alt="photo" th:src="@{${door.getPicture}}" height='100%'  width='100%' style="display: inline-flex; align-items: center;
+                                "/></td>
+                        </tr>
+                    </table>
+                    </div>
+            
+        <div class="footer">
+        <p>LB Passive Fire Ltd</p>
+    </div>
+    
+     <div class="page-number">Page <span th:text="${pageNumber}"></span></div>
+    </body>
+    </html>
