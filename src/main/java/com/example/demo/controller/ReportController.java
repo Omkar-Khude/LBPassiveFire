@@ -81,7 +81,15 @@ public class ReportController {
 		             context.setVariable("fireRisks", fireRisks);
 		             return templateEngine.process("fire-stopping", context); 
 	             
-	         } else if (reportType.equalsIgnoreCase("surveyRemedialReport")) {
+	         } 
+	             else if(reportType.equalsIgnoreCase("fireStoppingRemedialReport")) {
+	            	 List<FireRisk> fireRisks = survey.getFireRisks();
+		             context.setVariable("fireRisks", fireRisks);
+		             List<Remediation> remediations = survey.getRemediations();
+		             context.setVariable("remediations", remediations);
+		             return templateEngine.process("fireStoppingRemedial", context); 
+	             
+	     }else if (reportType.equalsIgnoreCase("surveyRemedialReport")) {
 	             List<Remediation> remediations = survey.getRemediations();
 	             context.setVariable("remediations", remediations);
 	             return templateEngine.process("survey-remedial-report", context);
