@@ -41,7 +41,7 @@ public class ReportController {
     
    	 
 	 @GetMapping("/report")
-	 @Operation(description ="Get api to generate survey report and survey remedial report by surveyAddress and reportType")
+	 @Operation(description ="Get api to generate survey report, survey remedial report, fireStopping report and fireStoppingRemedial report by surveyAddress and reportType")
 	 public ResponseEntity<byte[]> generateReport(@RequestParam("siteAddress") String siteAddress, @RequestParam("reportType") String reportType) {
 	     try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
 	         String htmlContent = generateHtmlReport(siteAddress, reportType);
