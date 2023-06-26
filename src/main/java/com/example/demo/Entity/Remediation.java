@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ public class Remediation {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "survey_id")
+	@JsonBackReference
     private Survey survey;
 	
 	

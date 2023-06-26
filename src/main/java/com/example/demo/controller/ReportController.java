@@ -40,68 +40,6 @@ public class ReportController {
 	    }
     
    	 
-//	 @GetMapping("/report")
-//	 @Operation(description ="Get api to generate survey report, survey remedial report, fireStopping report and fireStoppingRemedial report by surveyAddress and reportType")
-//	 public ResponseEntity<byte[]> generateReport(@RequestParam("siteAddress") String siteAddress, @RequestParam("reportType") String reportType) {
-//	     try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-//	         String htmlContent = generateHtmlReport(siteAddress, reportType);
-//	         ITextRenderer renderer = new ITextRenderer();
-//	         renderer.setDocumentFromString(htmlContent);
-//	         renderer.layout();
-//	         renderer.createPDF(outputStream);
-//	         byte[] pdfBytes = outputStream.toByteArray();
-//
-//	         HttpHeaders headers = new HttpHeaders();
-//	         headers.setContentType(MediaType.APPLICATION_PDF);
-//	         headers.setContentDispositionFormData("attachment", "report-details.pdf");
-//	         headers.setContentLength(pdfBytes.length);
-//
-//	         return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
-//	     } catch (IOException | DocumentException e) {
-//	         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//	     }
-//	 }
-//
-//	 private String generateHtmlReport(String siteAddress, String reportType) {
-//	     Optional<Survey> surveyOptional = surveyRepository.findBySiteAddress(siteAddress);
-//	     if (surveyOptional.isPresent()) {
-//	         Survey survey = surveyOptional.get();
-//	         List<Door> doors = survey.getDoors();
-//	         Context context = new Context();
-//	         context.setVariable("survey", survey);
-//	         context.setVariable("doors", doors);
-//	         context.setVariable("reportNumber", String.format("%05d", reportCounter.getAndIncrement()));
-//	         context.setVariable("pageNumber", 1);
-//
-//	         if (reportType.equalsIgnoreCase("fireDoorReport")) {
-//	             return templateEngine.process("report-details", context);
-//	         }
-//	             else if(reportType.equalsIgnoreCase("fireStoppingReport")) {
-//	            	 List<FireRisk> fireRisks = survey.getFireRisks();
-//		             context.setVariable("fireRisks", fireRisks);
-//		             return templateEngine.process("fire-stopping", context); 
-//	             
-//	         } 
-//	             else if(reportType.equalsIgnoreCase("fireStoppingRemedialReport")) {
-//	            	 List<FireRisk> fireRisks = survey.getFireRisks();
-//		             context.setVariable("fireRisks", fireRisks);
-//		             List<Remediation> remediations = survey.getRemediations();
-//		             context.setVariable("remediations", remediations);
-//		             return templateEngine.process("fireStoppingRemedial", context); 
-//	             
-//	     }else if (reportType.equalsIgnoreCase("fireDoorRemedialReport")) {
-//	             List<Remediation> remediations = survey.getRemediations();
-//	             context.setVariable("remediations", remediations);
-//	             return templateEngine.process("survey-remedial-report", context);
-//	         } else {
-//	             throw new IllegalArgumentException("Invalid report type: " + reportType);
-//	         }
-//	     } else {
-//	         throw new IllegalArgumentException("Survey not found with siteAddress: " + siteAddress);
-//	     }
-//	 }
-//
- 
 	 @GetMapping("/report")
 	 @Operation(description ="Get api to generate survey report, survey remedial report, fireStopping report and fireStoppingRemedial report by surveyAddress and reportType")
 	 public ResponseEntity<byte[]> generateReport(@RequestParam("siteAddress") String siteAddress, @RequestParam("reportType") String reportType) {
@@ -123,38 +61,100 @@ public class ReportController {
 	         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	     }
 	 }
+
 	 private String generateHtmlReport(String siteAddress, String reportType) {
-		    Optional<Survey> surveyOptional = surveyRepository.findBySiteAddress(siteAddress);
-		    if (surveyOptional.isPresent()) {
-		        Survey survey = surveyOptional.get();
-		    
-		        List<Door> doors = survey.getDoors();
-		        List<FireRisk> fireRisks = survey.getFireRisks();
-		        List<Remediation> remediations = survey.getRemediations();
-		        
-		        Context context = new Context();
-		        context.setVariable("survey", survey);
-		        context.setVariable("doors", doors);
-		        context.setVariable("fireRisks", fireRisks);
-		        context.setVariable("remediations", remediations);
-		        context.setVariable("reportNumber", String.format("%05d", reportCounter.getAndIncrement()));
-		        context.setVariable("pageNumber", 1);
+	     Optional<Survey> surveyOptional = surveyRepository.findBySiteAddress(siteAddress);
+	     if (surveyOptional.isPresent()) {
+	         Survey survey = surveyOptional.get();
+	         List<Door> doors = survey.getDoors();
+	         Context context = new Context();
+	         context.setVariable("survey", survey);
+	         context.setVariable("doors", doors);
+	         context.setVariable("reportNumber", String.format("%05d", reportCounter.getAndIncrement()));
+	         context.setVariable("pageNumber", 1);
 
-		        if (survey.getSurveyType().equalsIgnoreCase("FD") && reportType.equalsIgnoreCase("fireDoorReport")) {
-		            return templateEngine.process("report-details", context);
-		        } else if (survey.getSurveyType().equalsIgnoreCase("FDR") && reportType.equalsIgnoreCase("fireDoorRemedialReport")) {
-		            return templateEngine.process("survey-remedial-report", context);
-		        } else if (survey.getSurveyType().equalsIgnoreCase("FS") && reportType.equalsIgnoreCase("fireStoppingReport")) {
-		            return templateEngine.process("fire-stopping", context);
-		        } else if (survey.getSurveyType().equalsIgnoreCase("FSR") && reportType.equalsIgnoreCase("fireStoppingRemedialReport")) {
-		            return templateEngine.process("fireStoppingRemedial", context);
-		        } else {
-		            throw new IllegalArgumentException("Invalid report type: " + reportType);
-		        }
-		    } else {
-		        throw new IllegalArgumentException("Survey not found with siteAddress: " + siteAddress);
-		    }
+	         if (reportType.equalsIgnoreCase("fireDoorReport")) {
+	             return templateEngine.process("report-details", context);
+	         }
+	             else if(reportType.equalsIgnoreCase("fireStoppingReport")) {
+	            	 List<FireRisk> fireRisks = survey.getFireRisks();
+		             context.setVariable("fireRisks", fireRisks);
+		             return templateEngine.process("fire-stopping", context); 
+	             
+	         } 
+	             else if(reportType.equalsIgnoreCase("fireStoppingRemedialReport")) {
+	            	 List<FireRisk> fireRisks = survey.getFireRisks();
+		             context.setVariable("fireRisks", fireRisks);
+		             List<Remediation> remediations = survey.getRemediations();
+		             context.setVariable("remediations", remediations);
+		             return templateEngine.process("fireStoppingRemedial", context); 
+	             
+	     }else if (reportType.equalsIgnoreCase("fireDoorRemedialReport")) {
+	             List<Remediation> remediations = survey.getRemediations();
+	             context.setVariable("remediations", remediations);
+	             return templateEngine.process("survey-remedial-report", context);
+	         } else {
+	             throw new IllegalArgumentException("Invalid report type: " + reportType);
+	         }
+	     } else {
+	         throw new IllegalArgumentException("Survey not found with siteAddress: " + siteAddress);
+	     }
+	 }
+
+ 
+//	 @GetMapping("/report")
+//	 @Operation(description ="Get api to generate survey report, survey remedial report, fireStopping report and fireStoppingRemedial report by surveyAddress and reportType")
+//	 public ResponseEntity<byte[]> generateReport(@RequestParam("siteAddress") String siteAddress, @RequestParam("reportType") String reportType) {
+//	     try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+//	         String htmlContent = generateHtmlReport(siteAddress, reportType);
+//	         ITextRenderer renderer = new ITextRenderer();
+//	         renderer.setDocumentFromString(htmlContent);
+//	         renderer.layout();
+//	         renderer.createPDF(outputStream);
+//	         byte[] pdfBytes = outputStream.toByteArray();
+//
+//	         HttpHeaders headers = new HttpHeaders();
+//	         headers.setContentType(MediaType.APPLICATION_PDF);
+//	         headers.setContentDispositionFormData("attachment", "report-details.pdf");
+//	         headers.setContentLength(pdfBytes.length);
+//
+//	         return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+//	     } catch (IOException | DocumentException e) {
+//	         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//	     }
+//	 }
+//	 private String generateHtmlReport(String siteAddress, String reportType) {
+//		    Optional<Survey> surveyOptional = surveyRepository.findBySiteAddress(siteAddress);
+//		    if (surveyOptional.isPresent()) {
+//		        Survey survey = surveyOptional.get();
+//		    
+//		        List<Door> doors = survey.getDoors();
+//		        List<FireRisk> fireRisks = survey.getFireRisks();
+//		        List<Remediation> remediations = survey.getRemediations();
+//		        
+//		        Context context = new Context();
+//		        context.setVariable("survey", survey);
+//		        context.setVariable("doors", doors);
+//		        context.setVariable("fireRisks", fireRisks);
+//		        context.setVariable("remediations", remediations);
+//		        context.setVariable("reportNumber", String.format("%05d", reportCounter.getAndIncrement()));
+//		        context.setVariable("pageNumber", 1);
+//
+//		        if (survey.getSurveyType().equalsIgnoreCase("FD") && reportType.equalsIgnoreCase("fireDoorReport")) {
+//		            return templateEngine.process("report-details", context);
+//		        } else if (survey.getSurveyType().equalsIgnoreCase("FDR") && reportType.equalsIgnoreCase("fireDoorRemedialReport")) {
+//		            return templateEngine.process("survey-remedial-report", context);
+//		        } else if (survey.getSurveyType().equalsIgnoreCase("FS") && reportType.equalsIgnoreCase("fireStoppingReport")) {
+//		            return templateEngine.process("fire-stopping", context);
+//		        } else if (survey.getSurveyType().equalsIgnoreCase("FSR") && reportType.equalsIgnoreCase("fireStoppingRemedialReport")) {
+//		            return templateEngine.process("fireStoppingRemedial", context);
+//		        } else {
+//		            throw new IllegalArgumentException("Invalid report type: " + reportType);
+//		        }
+//		    } else {
+//		        throw new IllegalArgumentException("Survey not found with siteAddress: " + siteAddress);
+//		    }
 
 
-}
+//}
 }

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,9 +39,10 @@ public class SurveyController {
 	 
 	 @GetMapping("/getSurveyDetails")
 	 @Operation(description ="Get api to get all survey details") 
-	 public List<Survey> getAllSurveys() {
-	        return surveyRepository.findAll();
-	 }
+	 public ResponseEntity<List<Survey>> getAllSurveys() {
+		    List<Survey> surveys = surveyRepository.findAll();
+		    return new ResponseEntity<>(surveys, HttpStatus.OK);
+		}
 	
 	 @GetMapping("/getSurvey/FD")
 	 @Operation(description ="Get api to get FD survey details") 

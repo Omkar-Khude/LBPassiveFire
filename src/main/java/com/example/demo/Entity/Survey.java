@@ -2,6 +2,9 @@ package com.example.demo.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,12 +25,15 @@ public class Survey {
 	private String engineer;
 	
 	@OneToMany(mappedBy = "survey")
+	@JsonManagedReference
     private List<Door> doors = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "survey")
+	@JsonManagedReference
     private List<Remediation> remediations = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "survey")
+	@JsonManagedReference
     private List<FireRisk> fireRisks = new ArrayList<>();
 	
 	public int getId() {
