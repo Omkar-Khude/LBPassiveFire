@@ -24,6 +24,8 @@ import com.example.demo.Entity.Survey;
 import com.example.demo.repository.SurveyRepository;
 import com.lowagie.text.DocumentException;
 import io.swagger.v3.oas.annotations.Operation;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 @RestController
@@ -157,4 +159,43 @@ public class ReportController {
 
 
 //}
-}
+	 
+	 @GetMapping("/download")
+	    public ResponseEntity<byte[]> downloadDataAsExcel() {
+	        try (Workbook workbook = new XSSFWorkbook()) {
+	            Sheet sheet = workbook.createSheet("Data");
+
+	            
+	            List<String> data = getData();
+
+	            
+	            int rowNum = 0;
+	            for (String item : data) {
+	                Row row = sheet.createRow(rowNum++);
+	                Cell cell = row.createCell(0);
+	                cell.setCellValue(item);
+	            }
+
+	            
+	            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+	            workbook.write(outputStream);
+
+	            HttpHeaders headers = new HttpHeaders();
+	            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+	            headers.setContentDispositionFormData("attachment", "data.xlsx");
+	            headers.setContentLength(outputStream.size());
+
+	            return new ResponseEntity<>(outputStream.toByteArray(), headers, HttpStatus.OK);
+	        } catch (IOException e) {
+	           
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	        }
+	    }
+
+	   
+	    private List<String> getData() {
+	       
+	        return List.of("Data 1", "Data 2", "Data 3");
+	    }
+	}
+
