@@ -156,11 +156,10 @@ public class ReportController {
 //		    } else {
 //		        throw new IllegalArgumentException("Survey not found with siteAddress: " + siteAddress);
 //		    }
-
-
 //}
 	 
 	 @GetMapping("/download")
+	 @Operation(description ="Get api to generate excel report")
 	    public ResponseEntity<byte[]> downloadDataAsExcel() {
 	        try (Workbook workbook = new XSSFWorkbook()) {
 	            Sheet sheet = workbook.createSheet("Data");
