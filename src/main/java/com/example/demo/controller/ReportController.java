@@ -106,101 +106,9 @@ public class ReportController {
 	 }
 
  
-//	 @GetMapping("/report")
-//	 @Operation(description ="Get api to generate survey report, survey remedial report, fireStopping report and fireStoppingRemedial report by surveyAddress and reportType")
-//	 public ResponseEntity<byte[]> generateReport(@RequestParam("siteAddress") String siteAddress, @RequestParam("reportType") String reportType) {
-//	     try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-//	         String htmlContent = generateHtmlReport(siteAddress, reportType);
-//	         ITextRenderer renderer = new ITextRenderer();
-//	         renderer.setDocumentFromString(htmlContent);
-//	         renderer.layout();
-//	         renderer.createPDF(outputStream);
-//	         byte[] pdfBytes = outputStream.toByteArray();
-//
-//	         HttpHeaders headers = new HttpHeaders();
-//	         headers.setContentType(MediaType.APPLICATION_PDF);
-//	         headers.setContentDispositionFormData("attachment", "report-details.pdf");
-//	         headers.setContentLength(pdfBytes.length);
-//
-//	         return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
-//	     } catch (IOException | DocumentException e) {
-//	         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//	     }
-//	 }
-//	 private String generateHtmlReport(String siteAddress, String reportType) {
-//		    Optional<Survey> surveyOptional = surveyRepository.findBySiteAddress(siteAddress);
-//		    if (surveyOptional.isPresent()) {
-//		        Survey survey = surveyOptional.get();
-//		    
-//		        List<Door> doors = survey.getDoors();
-//		        List<FireRisk> fireRisks = survey.getFireRisks();
-//		        List<Remediation> remediations = survey.getRemediations();
-//		        
-//		        Context context = new Context();
-//		        context.setVariable("survey", survey);
-//		        context.setVariable("doors", doors);
-//		        context.setVariable("fireRisks", fireRisks);
-//		        context.setVariable("remediations", remediations);
-//		        context.setVariable("reportNumber", String.format("%05d", reportCounter.getAndIncrement()));
-//		        context.setVariable("pageNumber", 1);
-//
-//		        if (survey.getSurveyType().equalsIgnoreCase("FD") && reportType.equalsIgnoreCase("fireDoorReport")) {
-//		            return templateEngine.process("report-details", context);
-//		        } else if (survey.getSurveyType().equalsIgnoreCase("FDR") && reportType.equalsIgnoreCase("fireDoorRemedialReport")) {
-//		            return templateEngine.process("survey-remedial-report", context);
-//		        } else if (survey.getSurveyType().equalsIgnoreCase("FS") && reportType.equalsIgnoreCase("fireStoppingReport")) {
-//		            return templateEngine.process("fire-stopping", context);
-//		        } else if (survey.getSurveyType().equalsIgnoreCase("FSR") && reportType.equalsIgnoreCase("fireStoppingRemedialReport")) {
-//		            return templateEngine.process("fireStoppingRemedial", context);
-//		        } else {
-//		            throw new IllegalArgumentException("Invalid report type: " + reportType);
-//		        }
-//		    } else {
-//		        throw new IllegalArgumentException("Survey not found with siteAddress: " + siteAddress);
-//		    }
-//}
 	 
-//	 @GetMapping("/download")
-//	 @Operation(description ="Get api to generate excel report")
-//	    public ResponseEntity<byte[]> downloadDataAsExcel() {
-//	        try (Workbook workbook = new XSSFWorkbook()) {
-//	            Sheet sheet = workbook.createSheet("Data");
-//
-//	            
-//	            List<String> data = getData();
-//
-//	            
-//	            int rowNum = 0;
-//	            for (String item : data) {
-//	                Row row = sheet.createRow(rowNum++);
-//	                Cell cell = row.createCell(0);
-//	                cell.setCellValue(item);
-//	            }
-//
-//	            
-//	            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//	            workbook.write(outputStream);
-//
-//	            HttpHeaders headers = new HttpHeaders();
-//	            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-//	            headers.setContentDispositionFormData("attachment", "data.xlsx");
-//	            headers.setContentLength(outputStream.size());
-//
-//	            return new ResponseEntity<>(outputStream.toByteArray(), headers, HttpStatus.OK);
-//	        } catch (IOException e) {
-//	           
-//	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//	        }
-//	    }
-//
-//	   
-//	    private List<String> getData() {
-//	       
-//	        return List.of("Data 1", "Data 2", "Data 3");
-//	    }
-//	}
-	 
-	 @GetMapping("/download")
+	 @GetMapping("/excelReportDownload")
+	 @Operation(description ="Get api to download report in excel sheet")
 	    public ResponseEntity<byte[]> downloadDataAsExcel() {
 	        try (Workbook workbook = new XSSFWorkbook()) {
 	            Sheet sheet = workbook.createSheet("Data");
@@ -299,11 +207,38 @@ public class ReportController {
 		            } else if (door.getDoorReplacement().equalsIgnoreCase("no")) {
 		                nameCell.setCellValue("0");
 		            }
-		            row.createCell(9).setCellValue(0);
-		            row.createCell(10).setCellValue(0);
-		            row.createCell(11).setCellValue(0);
-		            row.createCell(12).setCellValue(0);
-		            row.createCell(13).setCellValue(0);
+		            Cell nameCell1 = row.createCell(9);
+		            if (door.getNotes().equalsIgnoreCase("Gaps - pads adjustment")) {
+		                nameCell1.setCellValue("1");
+		            } else{
+		                nameCell1.setCellValue("0");
+		            }
+		            Cell nameCell2 = row.createCell(10);
+		            if (door.getNotes().equalsIgnoreCase("Gaps - frame adjustment (Wedge (softwood) frame, & firestopping) Single FD30")) {
+		                nameCell2.setCellValue("1");
+		            } else{
+		                nameCell2.setCellValue("0");
+		            }
+		            Cell nameCell3 = row.createCell(11);
+		            if (door.getNotes().equalsIgnoreCase("Gaps - frame adjustment (Wedge (softwood) frame, & firestopping) Double FD30")) {
+		                nameCell3.setCellValue("1");
+		            } else{
+		                nameCell3.setCellValue("0");
+		            }
+		            Cell nameCell4 = row.createCell(12);
+		            if (door.getNotes().equalsIgnoreCase("Gaps - frame adjustment (Wedge (hardwood) frame, & firestopping) Single FD60")) {
+		                nameCell4.setCellValue("1");
+		            } else{
+		                nameCell4.setCellValue("0");
+		            }
+
+		            Cell nameCell5 = row.createCell(13);
+		            if (door.getNotes().equalsIgnoreCase("Gaps - frame adjustment (Wedge (hardwood) frame, & firestopping) Double FD60")) {
+		                nameCell5.setCellValue("1");
+		            } else{
+		                nameCell5.setCellValue("0");
+		            }
+
 		            row.createCell(14).setCellValue(0);
 		            row.createCell(15).setCellValue(0);
 		            row.createCell(16).setCellValue(0);
